@@ -13,8 +13,8 @@
 .everest button:disabled{opacity:.55;cursor:not-allowed}
 .everest .quiz-progress{color:var(--muted);font-size:14px;margin:0 0 16px}
 .everest .quiz-contact{margin-top:0;border-top:0;padding-top:0}
-.everest .quiz-nav{display:flex;justify-content:space-between;gap:12px;margin-top:20px}
-.everest .quiz-nav #quizNext{margin-left:auto}
+.everest .quiz-nav{display:flex;justify-content:flex-start;gap:12px;margin-top:20px}
+.everest .quiz-nav #quizNext{margin-left:0}
 .everest .choice input:focus-visible+span{outline:3px solid var(--yellow);outline-offset:3px}
 .everest button:focus-visible,.everest a:focus-visible{outline:3px solid #c99816;outline-offset:4px}
 .everest .wrap,.everest .hero>* ,.everest .scene>*{min-width:0}

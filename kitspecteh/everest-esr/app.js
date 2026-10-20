@@ -7,6 +7,38 @@
   const $ = selector => root.querySelector(selector);
   const all = selector => [...root.querySelectorAll(selector)];
   const sceneKeys = ['construction', 'quarry', 'unpaved', 'winter', 'forestry-agro'];
+  const sceneWidths = {construction:1024, quarry:1024, unpaved:1024, winter:998, 'forestry-agro':1280};
+  const sceneSources = key => `assets/${key}-640.webp 640w, assets/${key}-${sceneWidths[key]}.webp ${sceneWidths[key]}w`;
+  // Warm responsive scenes only near their block and after initial page loading.
+  // Keep the image objects alive; decoding ahead avoids the first-click cost.
+  const warmedScenes = [];
+  let scenesWarmed = false;
+  function warmScenes() {
+    if (scenesWarmed || navigator.connection?.saveData || /2g/.test(navigator.connection?.effectiveType || '')) return;
+    scenesWarmed = true;
+    for (const key of sceneKeys) {
+      const img = new Image();
+      img.fetchPriority = 'low';
+      img.sizes = $('#siteImage').sizes;
+      img.srcset = sceneSources(key);
+      img.src = `assets/${key}-${sceneWidths[key]}.webp`;
+      warmedScenes.push(img);
+      img.decode?.().catch(() => {});
+    }
+  }
+  function observeScenes() {
+    if (!('IntersectionObserver' in window)) { warmScenes(); return; }
+    const observer = new IntersectionObserver(entries => {
+      if (entries.some(entry => entry.isIntersecting)) {
+        observer.disconnect();
+        if ('requestIdleCallback' in window) requestIdleCallback(warmScenes, {timeout:1000});
+        else setTimeout(warmScenes, 0);
+      }
+    }, {rootMargin:'300px'});
+    observer.observe($('#sites'));
+  }
+  if (document.readyState === 'complete') observeScenes();
+  else window.addEventListener('load', observeScenes, {once:true});
   const tabs = all('[data-site]');
   let chosenSite = '';
   function selectSite(index, focus = false) {
@@ -17,7 +49,8 @@
     });
     $('#siteName').textContent = sites[index].name;
     $('#siteDescription').textContent = sites[index].description;
-    $('#siteImage').src = `assets/${sceneKeys[index]}.jpg`;
+    $('#siteImage').srcset = sceneSources(sceneKeys[index]);
+    $('#siteImage').src = `assets/${sceneKeys[index]}-${sceneWidths[sceneKeys[index]]}.webp`;
     $('#siteImage').alt = `Иллюстрация площадки: ${sites[index].name}`;
     if (focus) tabs[index].focus();
   }
