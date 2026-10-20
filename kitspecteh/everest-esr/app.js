@@ -119,7 +119,7 @@
     previousOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
     dialog.showModal();
-    $('#closeRequest').focus({preventScroll:true});
+    $('#requestTitle').focus({preventScroll:true});
   }));
   $('#closeRequest').addEventListener('click', () => dialog.close());
   dialog.addEventListener('click', event => {
