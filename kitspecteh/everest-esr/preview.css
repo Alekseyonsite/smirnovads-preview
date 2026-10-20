@@ -18,7 +18,8 @@
 .everest .choice input:focus-visible+span{outline:3px solid var(--yellow);outline-offset:3px}
 .everest button:focus-visible,.everest a:focus-visible{outline:3px solid #c99816;outline-offset:4px}
 .everest .wrap,.everest .hero>* ,.everest .scene>*{min-width:0}
-.everest .specs div{overflow-wrap:anywhere}
+.everest .specs dt{min-width:0;flex:1;overflow-wrap:normal;word-break:normal}
+.everest .specs dd{flex:0 0 auto;white-space:nowrap;overflow-wrap:normal;word-break:normal}
 .everest .privacy-link[aria-disabled]{display:block;margin-top:7px;text-decoration:none;color:#c5d3ca}
 @media(max-width:650px){
  .everest .hero-photo{width:100%}
