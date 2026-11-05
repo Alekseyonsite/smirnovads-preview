@@ -1,0 +1,1 @@
+import{n as e}from"./index-BpsPXrG8.js";var t=e();function n(){return(0,t.jsxs)(`main`,{className:`container-x py-12`,children:[(0,t.jsx)(`h1`,{className:`text-3xl`,children:`Страница сравнения доступна в локальном просмотре`}),(0,t.jsx)(`a`,{href:`/`,className:`btn-ghost mt-6`,children:`На главную`})]})}export{n as component};
