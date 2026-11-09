@@ -1,1 +1,0 @@
-import{n as e}from"./index-Blo3rETw.js";import{l as t}from"./content-5kc52yaP.js";var n=e();`${t}`;function r(){return(0,n.jsxs)(`main`,{className:`container-x py-12`,children:[(0,n.jsx)(`h1`,{className:`text-3xl`,children:`Страница сравнения доступна в локальном просмотре`}),(0,n.jsx)(`a`,{href:`/`,className:`btn-ghost mt-6`,children:`На главную`})]})}export{r as component};
